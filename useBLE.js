@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import { useMemo, useState } from "react";
 import { PermissionsAndroid, Platform } from "react-native";
 import {
@@ -27,8 +28,11 @@ const HEART_RATE_CHARACTERISTIC = "00002a37-0000-1000-8000-00805f9b34fb";
 function useBLE() {
   const bleManager = useMemo(() => new BleManager(), []);
   const [allDevices, setAllDevices] = useState([]);
-  const [connectedDevice, setConnectedDevice] = useState<Device | null>(null);
-  const [heartRate, setHeartRate] = useState<number>(0);
+  const [connectedDevice, setConnectedDevice] = useState(null);
+  const [heartRate, setHeartRate] = useState(0);
+ 
+
+  console.log(allDevices);
 
   const requestAndroid31Permissions = async () => {
     const bluetoothScanPermission = await PermissionsAndroid.request(
@@ -91,10 +95,14 @@ function useBLE() {
 
   const scanForPeripherals = () =>
     bleManager.startDeviceScan(null, null, (error, device) => {
+    //  console.log(device);
       if (error) {
-        console.log(error);
+       // console.log(error);
+       console.log('there ia an error');
       }
-      if (device && device.name?.includes("CorSense")) {
+       if (device ) {
+      // if (device && device.name?.includes("HC-05")) {
+
         setAllDevices((prevState) => {
           if (!isDuplicteDevice(prevState, device)) {
             return [...prevState, device];
@@ -124,22 +132,21 @@ function useBLE() {
     }
   };
 
-  const onHeartRateUpdate = (
-    // error: BleError | null,
-    // characteristic: Characteristic | null
-  ) => {
+  const onHeartRateUpdate = (error, characteristic) => {
     if (error) {
-      console.log(error);
+     // console.log(error);
       return -1;
     } else if (!characteristic?.value) {
       console.log("No Data was recieved");
       return -1;
     }
 
-    const rawData = base64.decode(characteristic.value);
+    ///const rawData = base64.decode(characteristic.value);
+    const rawData = characteristic;
+    //console.log(rawData  +'sam');
     let innerHeartRate = -1;
 
-    const firstBitValue = Number(rawData) & 0x01;
+    const firstBitValue= Number(rawData) & 0x01;
 
     if (firstBitValue === 0) {
       innerHeartRate = rawData[1].charCodeAt(0);
@@ -155,8 +162,8 @@ function useBLE() {
   const startStreamingData = async (device) => {
     if (device) {
       device.monitorCharacteristicForService(
-        HEART_RATE_UUID,
-        HEART_RATE_CHARACTERISTIC,
+        // HEART_RATE_UUID,
+        // HEART_RATE_CHARACTERISTIC,
         onHeartRateUpdate
       );
     } else {
