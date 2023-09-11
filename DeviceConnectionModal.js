@@ -26,7 +26,7 @@ import { Device } from "react-native-ble-plx";
 const DeviceModalListItem = (props) => {
   const { item, connectToPeripheral, closeModal } = props;
 
-console.log(item.item.id);
+console.log(item.item);
 
   const connectAndCloseModal = useCallback(() => {
     connectToPeripheral(item.item);
@@ -83,9 +83,7 @@ const DeviceModal = (props) => {
         </Text>
         <FlatList
         ListHeaderComponent={<>
-          <Text>
-          Sam
-          </Text>
+          
           </>}
           contentContainerStyle={modalStyle.modalFlatlistContiner}
           data={devices}
