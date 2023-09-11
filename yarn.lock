@@ -1878,10 +1878,10 @@
     component-type "^1.2.1"
     join-component "^1.1.0"
 
-"@shopify/react-native-skia@^0.1.202":
-  version "0.1.203"
-  resolved "https://registry.yarnpkg.com/@shopify/react-native-skia/-/react-native-skia-0.1.203.tgz#3112790266c76eda7768a2e2fc4793e602eb615e"
-  integrity sha512-+7/bfTgg3RhTSUHfsopb6vHFcYF2Z3d+8RGnZG84J9nmeODOYAl9b+oRY6QW01Ln2moyC2FruxMPR2ZICMFgVw==
+"@shopify/react-native-skia@0.1.196":
+  version "0.1.196"
+  resolved "https://registry.yarnpkg.com/@shopify/react-native-skia/-/react-native-skia-0.1.196.tgz#f58be7cffd22d4e86f285b6d85c336188b3a61c7"
+  integrity sha512-MwL+X9XzwPdyp5juOel6pNkd7DoRfPSbjqlkOTs5C83HCdceZOO0x6DMK9uiZv/mVxQwOnexfNh5h06185qiow==
   dependencies:
     canvaskit-wasm "0.38.0"
     react-reconciler "^0.27.0"
