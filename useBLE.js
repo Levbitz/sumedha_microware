@@ -97,10 +97,10 @@ function useBLE() {
     bleManager.startDeviceScan(null, null, (error, device) => {
     //  console.log(device);
       if (error) {
-       // console.log(error);
+       console.log(error);
        console.log('there ia an error');
       }
-       if (device  && device.id?.includes("00:22:04:01:07:C1") ) {
+       if (device ) {
       // if (device && device.name?.includes("HC-05")) {
 
       console.log('start')

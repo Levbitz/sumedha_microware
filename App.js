@@ -76,7 +76,7 @@ const App = () => {
             Please Connect to a Heart Rate Monitor
         </Text>*/}
           <Text style={styles.heartRateTitleText}>
-            Scan Available Devi
+            Scan Available Devices
           </Text>
           </>
           
