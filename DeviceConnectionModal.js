@@ -26,7 +26,11 @@ import { Device } from "react-native-ble-plx";
 const DeviceModalListItem = (props) => {
   const { item, connectToPeripheral, closeModal } = props;
 
+<<<<<<< HEAD
 //   console.log('start')
+=======
+console.log(item.item);
+>>>>>>> 8a0ab99ab21ebb478e9cfe6731c9582adee58cda
 
 // console.log(item.item._manager);
 
@@ -110,9 +114,7 @@ const DeviceModal = (props) => {
         </Text>
         <FlatList
         ListHeaderComponent={<>
-          <Text>
-          Sam
-          </Text>
+          
           </>}
           contentContainerStyle={modalStyle.modalFlatlistContiner}
           data={devices}
