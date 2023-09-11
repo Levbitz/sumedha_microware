@@ -26,8 +26,35 @@ import { Device } from "react-native-ble-plx";
 const DeviceModalListItem = (props) => {
   const { item, connectToPeripheral, closeModal } = props;
 
-console.log(item.item.id);
+//   console.log('start')
 
+// console.log(item.item._manager);
+
+// console.log('end')
+
+
+
+
+
+
+// {"_manager": 
+// {"_activePromises": [Object],
+//  "_activeSubscriptions": [Object],
+//   "_errorCodesToMessagesMapping": [Object], 
+//   "_eventEmitter": [NativeEventEmitter],
+//    "_scanEventSubscription": [Object], 
+//    "_uniqueId": 0}, 
+//    "id": "EA:FC:3D:19:EF:F0", 
+//    "isConnectable": null,
+//     "localName": null, 
+//     "manufacturerData": "TAASAgAB",
+//      "mtu": 23, "name": null, 
+//      "overflowServiceUUIDs": null,
+//       "rssi": -80, "serviceData":
+//        null, "serviceUUIDs": null, 
+//        "solicitedServiceUUIDs": null, 
+//        "txPowerLevel": null},
+//         "separators": {"highlight": [Function highlight], "unhighlight": [Function unhighlight], "updateProps": [Function updateProps]}}
   const connectAndCloseModal = useCallback(() => {
     connectToPeripheral(item.item);
     closeModal();

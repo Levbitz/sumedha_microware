@@ -100,8 +100,14 @@ function useBLE() {
        // console.log(error);
        console.log('there ia an error');
       }
-       if (device ) {
+       if (device  && device.id?.includes("00:22:04:01:07:C1") ) {
       // if (device && device.name?.includes("HC-05")) {
+
+      console.log('start')
+
+        console.log(device.id);
+   
+console.log('end')
 
         setAllDevices((prevState) => {
           if (!isDuplicteDevice(prevState, device)) {

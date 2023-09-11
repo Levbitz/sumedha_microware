@@ -17,7 +17,9 @@ export default class BluetoothService {
     await manager.cancelDeviceConnection(deviceId);
   }
 
-  static async readCharacteristic(deviceId, serviceUUID, characteristicUUID) {
+  static async readCharacteristic(deviceId, 
+    serviceUUID, characteristicUUID
+    ) {
     const device = await this.connectToDevice(deviceId);
     const service = await device.discoverAllServicesAndCharacteristics();
     const characteristic = await service.readCharacteristicForService(serviceUUID, characteristicUUID);
