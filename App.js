@@ -59,13 +59,8 @@ const App = () => {
           <>
             <PulseIndicator />
 
-<<<<<<< HEAD
-            <Text style={styles.heartRateTitleText}>Your Heart Rate Is:</Text>
-            <Text style={styles.heartRateText}>{heartRate} bpm</Text>
-=======
-            <Text style={styles.heartRateTitleText}>Your Measurement Is:</Text>
-            <Text style={styles.heartRateText}>{heartRate} </Text>
->>>>>>> 8a0ab99ab21ebb478e9cfe6731c9582adee58cda
+            <Text style={styles.heartRateTitleText}>Your Result Is:</Text>
+            <Text style={styles.heartRateText}>{heartRate}</Text>
             <Text style={styles.heartRateText}>
               {connectedDevice.name}
             </Text>
@@ -81,11 +76,7 @@ const App = () => {
             Please Connect to a Heart Rate Monitor
         </Text>*/}
           <Text style={styles.heartRateTitleText}>
-<<<<<<< HEAD
             Scan Available Devi
-=======
-            Scan Available Devices
->>>>>>> 8a0ab99ab21ebb478e9cfe6731c9582adee58cda
           </Text>
           </>
           
@@ -145,11 +136,6 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
-<<<<<<< HEAD
-=======
-
-export default App;
->>>>>>> 8a0ab99ab21ebb478e9cfe6731c9582adee58cda
 
 export default App;
 
@@ -157,22 +143,11 @@ export default App;
 
 
 
-<<<<<<< HEAD
-=======
-// import React, { useState } from 'react';
-// import { View, Text, Button } from 'react-native';
-// import BluetoothService from './bluetoothservice';
->>>>>>> 8a0ab99ab21ebb478e9cfe6731c9582adee58cda
 
 // import React, { useState } from 'react';
 // import { View, Text, Button } from 'react-native';
 // import BluetoothService from './BluetoothService';
 
-<<<<<<< HEAD
-=======
-// function App() {
-//   const [weightData, setWeightData] = useState(null);
->>>>>>> 8a0ab99ab21ebb478e9cfe6731c9582adee58cda
 
 // function App() {
 //   const [weightData, setWeightData] = useState(null);

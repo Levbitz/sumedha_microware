@@ -83,7 +83,7 @@ const DeviceModal = (props) => {
   const renderDeviceModalListItem = useCallback(
     (item) => {
       // console.log(item.id);
-     // console.log(item.item);
+      console.log(item.item);
       // console.log(item.item.manufacturerData);
     //  console.log(item.item._manager);
       return (
