@@ -1,30 +1,47 @@
+
+
+
+
+
+
+import React, { useState, useEffect } from 'react';
 import { BleManager } from 'react-native-ble-plx';
 
-const manager = new BleManager();
+const BluetoothService = () => {
+  const [manager, setManager] = useState(new BleManager());
 
-export default class BluetoothService {
-  static async scan() {
+  const scan = async () => {
     const devices = await manager.startDeviceScan(null, null, true);
     return devices;
-  }
+  };
 
-  static async connectToDevice(deviceId) {
+  const connectToDevice = async (deviceId) => {
     const device = await manager.connectToDevice({ id: deviceId });
     return device;
-  }
+  };
 
-  static async disconnectDevice(deviceId) {
+  const disconnectDevice = async (deviceId) => {
     await manager.cancelDeviceConnection(deviceId);
-  }
+  };
 
-  static async readCharacteristic(deviceId, 
-    serviceUUID, characteristicUUID
-    ) {
-    const device = await this.connectToDevice(deviceId);
+  const readCharacteristic = async (deviceId, serviceUUID, characteristicUUID) => {
+    const device = await connectToDevice(deviceId);
     const service = await device.discoverAllServicesAndCharacteristics();
     const characteristic = await service.readCharacteristicForService(serviceUUID, characteristicUUID);
     const value = characteristic.value;
-    await this.disconnectDevice(deviceId);
+    await disconnectDevice(deviceId);
     return value;
-  }
-}
+  };
+
+  useEffect(() => {
+    // Clean up the manager when component is unmounted
+    return () => {
+      manager.destroy();
+    };
+  }, [manager]);
+
+  return null; // You may return JSX here if needed, or leave it as null if it's just a utility component.
+};
+
+export default BluetoothService;
+

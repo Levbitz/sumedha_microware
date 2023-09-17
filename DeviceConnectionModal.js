@@ -70,7 +70,14 @@ const DeviceModalListItem = (props) => {
       onPress={connectAndCloseModal}
       style={modalStyle.ctaButton}
     >
-      <Text style={modalStyle.ctaButtonText}>{item.item.manufacturerData}</Text>
+    {/*<Text style={modalStyle.ctaButtonText}>
+      {item.item.manufacturerData}
+      
+      
+  </Text>*/}
+      <Text style={modalStyle.ctaButtonText}>
+        {item.item.id}
+      </Text>
     </TouchableOpacity>
   );
 };
