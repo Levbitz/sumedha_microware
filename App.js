@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
 import { LogBox } from "react-native";
 LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
 LogBox.ignoreAllLogs();
@@ -25,6 +25,9 @@ const App = () => {
     heartRate,
     disconnectFromDevice,
   } = useBLE();
+
+
+  //console.log(allDevices);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
 
@@ -51,6 +54,12 @@ const App = () => {
   };
 
   //console.log(allDevices);
+
+
+  useEffect(() => {
+    scanForDevices();
+    setIsModalVisible(true);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

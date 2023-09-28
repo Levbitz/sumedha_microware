@@ -143,13 +143,18 @@ console.log('end')
      // console.log(error);
       return -1;
     } else if (!characteristic?.value) {
-      console.log("No Data was recieved");
-      return -1;
+      alert(JSON.stringify(characteristic));
+      // console.log("No Data was recieved");
+     return -1;
+      //alert(characteristic)
+      
     }
 
     ///const rawData = base64.decode(characteristic.value);
     const rawData = characteristic;
     //console.log(rawData  +'sam');
+    console.log(rawData);
+    alert('sam')
     let innerHeartRate = -1;
 
     const firstBitValue= Number(rawData) & 0x01;
@@ -185,6 +190,8 @@ console.log('end')
     connectedDevice,
     disconnectFromDevice,
     heartRate,
+    //rawData
+  
   };
 }
 
