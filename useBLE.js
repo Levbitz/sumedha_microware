@@ -23,7 +23,7 @@ function useBLE() {
   const [heartRate, setHeartRate] = useState(0);
  
 
-  console.log(allDevices);
+  // console.log(allDevices._manager);
 
   const requestAndroid31Permissions = async () => {
     const bluetoothScanPermission = await PermissionsAndroid.request(
@@ -130,8 +130,8 @@ function useBLE() {
   };
 
   const onHeartRateUpdate = (error, characteristic) => {
-Alert.alert('sam')
-Alert.alert(characteristic)
+// Alert.alert('sam')
+// Alert.alert(characteristic)
 
 //const rawData = base64.decode(characteristic.value);
    // console.log(characteristic.value);

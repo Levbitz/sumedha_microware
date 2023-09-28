@@ -13,6 +13,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ScrollView
 } from "react-native";
 import DeviceModal from '../../../DeviceConnectionModal';
 import { PulseIndicator } from '../../../PulseIndicator';
@@ -62,20 +63,27 @@ const HomeScreen = () => {
   //console.log(allDevices);
 
 
-  // useEffect(() => {
-  //   scanForDevices();
-  //   setIsModalVisible(true);
-  // }, []);
-alert(JSON.stringify(connectedDevice))
+  useEffect(() => {
+    scanForDevices();
+    setIsModalVisible(true);
+  }, []);
+//alert(JSON.stringify(connectedDevice))
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView>
+    <DeviceModal
+      closeModal={hideModal}
+      visible={isModalVisible}
+      connectToPeripheral={connectToDevice}
+      devices={allDevices}
+    />
+ 
     <View style={styles.heartRateTitleWrapper}>
       {connectedDevice ? (
         <>
-          <PulseIndicator />
+         {/* <PulseIndicator />
 
           <Text style={styles.heartRateTitleText}>Your Measurement Is:</Text>
-          <Text style={styles.heartRateText}>{/*heartRate*/} </Text>
+          <Text style={styles.heartRateText}>heartRate </Text>
           <Text style={styles.heartRateText}>
             {connectedDevice.name}
           </Text>
@@ -83,38 +91,33 @@ alert(JSON.stringify(connectedDevice))
           onPress={hideModal}
           >
           <Text>Close Modal</Text>
-          </Pressable>
+      </Pressable>*/}
         </>
       ) : (
         <>
         {/*<Text style={styles.heartRateTitleText}>
           Please Connect to a Heart Rate Monitor
-      </Text>*/}
+      </Text>
         <Text style={styles.heartRateTitleText}>
           Scan Available Devices 
         </Text>
         <Text style={styles.heartRateText}>
           Please make Sure the bluetooth device is powered on
-        </Text>
+      </Text>*/}
         </>
         
       )}
     </View>
-    <TouchableOpacity
+    {/*<TouchableOpacity
       onPress={connectedDevice ? disconnectFromDevice : openModal}
       style={styles.ctaButton}
     >
       <Text style={styles.ctaButtonText}>
         {connectedDevice ? "Disconnect" : "Scan"}
       </Text>
-    </TouchableOpacity>
-    <DeviceModal
-      closeModal={hideModal}
-      visible={isModalVisible}
-      connectToPeripheral={connectToDevice}
-      devices={allDevices}
-    />
-    </SafeAreaView>
+    </TouchableOpacity>*/}
+    
+    </ScrollView>
 
   );
 };

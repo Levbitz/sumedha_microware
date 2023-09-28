@@ -7,8 +7,11 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Alert,
+  View
 } from "react-native";
 import { Device } from "react-native-ble-plx";
+import { useNavigation } from "@react-navigation/native";
 
 
 
@@ -16,8 +19,10 @@ import { Device } from "react-native-ble-plx";
 const DeviceModalListItem = (props) => {
   const { item, connectToPeripheral, closeModal } = props;
 
+  const navigation = useNavigation()
 
-//console.log(item.item.name);
+
+//console.log(item.item);
 
 
 
@@ -35,7 +40,9 @@ const DeviceModalListItem = (props) => {
 
   return (
     <TouchableOpacity
-      onPress={connectAndCloseModal}
+    onPress={()=> navigation.navigate("DeviceDetails", {device:item.item})}
+    // onPress={()=> Alert.alert(item.item.manufacturerData)}
+     // onPress={connectAndCloseModal}
       style={modalStyle.ctaButton}
     >
     {/*<Text style={modalStyle.ctaButtonText}>
@@ -45,7 +52,19 @@ const DeviceModalListItem = (props) => {
   </Text>*/}
       <Text style={modalStyle.ctaButtonText}>
         {/*item.item.id*/}
-        {item.item.id}
+      Device Id is :  {item.item.id}
+      </Text>
+      <Text style={modalStyle.ctaButtonText}>
+        {/*item.item.id*/}
+      Manufacture Name :  {item.item.manufacturerData}
+      </Text>
+      <Text style={modalStyle.ctaButtonText}>
+        {/*item.item.id*/}
+      Brand Name :  {item.item.name ?item.item.name : 'No brand Name'}
+      </Text>
+      <Text style={modalStyle.ctaButtonText}>
+        {/*item.item.id*/}
+      Brand Name :  {item.item.mtu}
       </Text>
     </TouchableOpacity>
   );
@@ -58,19 +77,16 @@ const DeviceModal = (props) => {
 
   const renderDeviceModalListItem = useCallback(
     (item) => {
-      // console.log(item.id);
-      //console.log(item.item.mtu);
-      // console.log(item.item.manufacturerData);
-    //  console.log(item.item._manager);
+   
       return (
         <DeviceModalListItem
           item={item}
           connectToPeripheral={connectToPeripheral}
-          closeModal={closeModal}
+        
         />
       );
     },
-    [closeModal, connectToPeripheral]
+    [ connectToPeripheral]
   );
 
 
@@ -79,19 +95,18 @@ const DeviceModal = (props) => {
     closeModal();
   }, [closeModal, connectToPeripheral]);
   return (
-    <Modal
-      style={modalStyle.modalContainer}
-      animationType="slide"
-      transparent={false}
-      visible={visible}
-    >
-      <SafeAreaView style={modalStyle.modalTitle}>
-        <Text style={modalStyle.modalTitleText}>
-          Tap on a device to connect
-        </Text>
+    
+      <View style={{
+        //backgroundColor:"red",
+      
+     
+      }}>
+        
         <FlatList
         ListHeaderComponent={<>
-          
+          <Text style={modalStyle.modalTitleText}>
+          Tap on a device to connect
+        </Text>
           </>}
           contentContainerStyle={modalStyle.modalFlatlistContiner}
           data={devices}
@@ -99,37 +114,46 @@ const DeviceModal = (props) => {
 
           ListFooterComponent={
             <>
-            <TouchableOpacity
+         {/*   <TouchableOpacity
       onPress={connectAndCloseModal}
       style={modalStyle.ctaButton}
     >
-    {/*<Text style={modalStyle.ctaButtonText}>
-      {item.item.manufacturerData}
-      
-      
-  </Text>*/}
+   
       <Text style={modalStyle.ctaButtonText}>
         00:22:04:01:07:C1
       </Text>
-    </TouchableOpacity>
+    </TouchableOpacity>*/}
             </>
           }
         />
 
 
-      </SafeAreaView>
-    </Modal>
+      </View>
+  
   );
 };
 
+
+
+
+
+{/*<Modal
+      // style={modalStyle.modalContainer}
+      // animationType="slide"
+      // transparent={false}
+      // visible={visible}
+  >*/}
+ {/* </Modal>*/}
 const modalStyle = StyleSheet.create({
   modalContainer: {
     flex: 1,
     backgroundColor: "#f2f2f2",
   },
   modalFlatlistContiner: {
-    flex: 1,
-    justifyContent: "center",
+    // flex: 1,
+    // justifyContent: "center",
+    marginTop:10,
+    
   },
   modalCellOutline: {
     borderWidth: 1,
@@ -144,8 +168,8 @@ const modalStyle = StyleSheet.create({
     backgroundColor: "#f2f2f2",
   },
   modalTitleText: {
-    marginTop: 40,
-    fontSize: 30,
+    marginTop: 10,
+    fontSize: 20,
     fontWeight: "bold",
     marginHorizontal: 20,
     textAlign: "center",
@@ -154,15 +178,16 @@ const modalStyle = StyleSheet.create({
     backgroundColor: "#FF6060",
     justifyContent: "center",
     alignItems: "center",
-    height: 50,
+    // height: 50,
     marginHorizontal: 20,
     marginBottom: 5,
     borderRadius: 8,
   },
   ctaButtonText: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
     color: "white",
+    marginBottom:20
   },
 });
 

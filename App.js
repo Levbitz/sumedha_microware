@@ -21,6 +21,7 @@ import useBLE from "./useBLE";
 
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen/HomeScreen';
+import DeviceDetailsScreen from './src/screens/DeviceDetailsScreen/DeviceDetailsScreen';
 
 const Stack = createStackNavigator();
 
@@ -70,13 +71,14 @@ const App = () => {
   //   scanForDevices();
   //   setIsModalVisible(true);
   // }, []);
-alert(JSON.stringify(connectedDevice))
+//alert(JSON.stringify(connectedDevice))
   return (
 
     <NavigationContainer>
   
     <Stack.Navigator>
     <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="DeviceDetails" component={DeviceDetailsScreen} />
   
   </Stack.Navigator>
 
