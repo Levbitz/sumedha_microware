@@ -3,6 +3,11 @@
     "version": ">= 4.0.1"
   },
   "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+
     "preview": {
       "android": {
         "buildType": "apk"

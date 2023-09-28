@@ -1,4 +1,7 @@
+import 'react-native-gesture-handler';
+
 import React, { useState ,useEffect } from "react";
+import { NavigationContainer } from '@react-navigation/native';
 import { LogBox } from "react-native";
 LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
 LogBox.ignoreAllLogs();
@@ -14,6 +17,12 @@ import {
 import DeviceModal from "./DeviceConnectionModal";
 import { PulseIndicator } from "./PulseIndicator";
 import useBLE from "./useBLE";
+
+
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './src/screens/HomeScreen/HomeScreen';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   const {
@@ -63,53 +72,16 @@ const App = () => {
   // }, []);
 alert(JSON.stringify(connectedDevice))
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.heartRateTitleWrapper}>
-        {connectedDevice ? (
-          <>
-            <PulseIndicator />
 
-            <Text style={styles.heartRateTitleText}>Your Measurement Is:</Text>
-            <Text style={styles.heartRateText}>{/*heartRate*/} </Text>
-            <Text style={styles.heartRateText}>
-              {connectedDevice.name}
-            </Text>
-            <Pressable
-            onPress={hideModal}
-            >
-            <Text>Close Modal</Text>
-            </Pressable>
-          </>
-        ) : (
-          <>
-          {/*<Text style={styles.heartRateTitleText}>
-            Please Connect to a Heart Rate Monitor
-        </Text>*/}
-          <Text style={styles.heartRateTitleText}>
-            Scan Available Devices 
-          </Text>
-          <Text style={styles.heartRateText}>
-            Please make Sure the bluetooth device is powered on
-          </Text>
-          </>
-          
-        )}
-      </View>
-      <TouchableOpacity
-        onPress={connectedDevice ? disconnectFromDevice : openModal}
-        style={styles.ctaButton}
-      >
-        <Text style={styles.ctaButtonText}>
-          {connectedDevice ? "Disconnect" : "Scan"}
-        </Text>
-      </TouchableOpacity>
-      <DeviceModal
-        closeModal={hideModal}
-        visible={isModalVisible}
-        connectToPeripheral={connectToDevice}
-        devices={allDevices}
-      />
-    </SafeAreaView>
+    <NavigationContainer>
+  
+    <Stack.Navigator>
+    <Stack.Screen name="Home" component={HomeScreen} />
+  
+  </Stack.Navigator>
+
+      </NavigationContainer>
+
   );
 };
 
@@ -189,3 +161,58 @@ export default App;
 // }
 
 // export default App;
+
+
+
+
+
+
+
+
+//  {/* <SafeAreaView style={styles.container}>
+//       <View style={styles.heartRateTitleWrapper}>
+//         {connectedDevice ? (
+//           <>
+//             <PulseIndicator />
+
+//             <Text style={styles.heartRateTitleText}>Your Measurement Is:</Text>
+//             <Text style={styles.heartRateText}>{/*heartRate*/} </Text>
+//             <Text style={styles.heartRateText}>
+//               {connectedDevice.name}
+//             </Text>
+//             <Pressable
+//             onPress={hideModal}
+//             >
+//             <Text>Close Modal</Text>
+//             </Pressable>
+//           </>
+//         ) : (
+//           <>
+//           {/*<Text style={styles.heartRateTitleText}>
+//             Please Connect to a Heart Rate Monitor
+//         </Text>*/}
+//           <Text style={styles.heartRateTitleText}>
+//             Scan Available Devices 
+//           </Text>
+//           <Text style={styles.heartRateText}>
+//             Please make Sure the bluetooth device is powered on
+//           </Text>
+//           </>
+          
+//         )}
+//       </View>
+//       <TouchableOpacity
+//         onPress={connectedDevice ? disconnectFromDevice : openModal}
+//         style={styles.ctaButton}
+//       >
+//         <Text style={styles.ctaButtonText}>
+//           {connectedDevice ? "Disconnect" : "Scan"}
+//         </Text>
+//       </TouchableOpacity>
+//       <DeviceModal
+//         closeModal={hideModal}
+//         visible={isModalVisible}
+//         connectToPeripheral={connectToDevice}
+//         devices={allDevices}
+//       />
+//       </SafeAreaView>*/}
