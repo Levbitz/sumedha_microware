@@ -68,8 +68,8 @@ const App = () => {
           <>
             <PulseIndicator />
 
-            <Text style={styles.heartRateTitleText}>Your Result Is:</Text>
-            <Text style={styles.heartRateText}>{heartRate}</Text>
+            <Text style={styles.heartRateTitleText}>Your Measurement Is:</Text>
+            <Text style={styles.heartRateText}>{heartRate} </Text>
             <Text style={styles.heartRateText}>
               {connectedDevice.name}
             </Text>
@@ -155,12 +155,12 @@ export default App;
 
 // import React, { useState } from 'react';
 // import { View, Text, Button } from 'react-native';
-// import BluetoothService from './BluetoothService';
+// import BluetoothService from './bluetoothservice';
 
 
 // function App() {
 //   const [weightData, setWeightData] = useState(null);
- 
+
 
 //   const handleReadWeight = async () => {
 //     const deviceId = 'YOUR_DEVICE_ID'; // Replace with your device ID
