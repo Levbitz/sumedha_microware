@@ -1,6 +1,6 @@
 /* eslint-disable no-bitwise */
 import { useMemo, useState } from "react";
-import { PermissionsAndroid, Platform } from "react-native";
+import { Alert, PermissionsAndroid, Platform } from "react-native";
 import {
   BleError,
   BleManager,
@@ -15,15 +15,6 @@ import base64 from "react-native-base64";
 const HEART_RATE_UUID = "0000180d-0000-1000-8000-00805f9b34fb";
 const HEART_RATE_CHARACTERISTIC = "00002a37-0000-1000-8000-00805f9b34fb";
 
-// interface BluetoothLowEnergyApi {
-//   requestPermissions(): Promise<boolean>;
-//   scanForPeripherals(): void;
-//   connectToDevice: (deviceId: Device) => Promise<void>;
-//   disconnectFromDevice: () => void;
-//   connectedDevice: Device | null;
-//   allDevices: Device[];
-//   heartRate: number;
-// }
 
 function useBLE() {
   const bleManager = useMemo(() => new BleManager(), []);
@@ -103,11 +94,11 @@ function useBLE() {
        if (device ) {
       // if (device && device.name?.includes("HC-05")) {
 
-      console.log('start')
+//       console.log('start')
 
-        console.log(device.id);
+//         console.log(device.id);
    
-console.log('end')
+// console.log('end')
 
         setAllDevices((prevState) => {
           if (!isDuplicteDevice(prevState, device)) {
@@ -139,43 +130,50 @@ console.log('end')
   };
 
   const onHeartRateUpdate = (error, characteristic) => {
-    if (error) {
-     // console.log(error);
-      return -1;
-    } else if (!characteristic?.value) {
-      alert(JSON.stringify(characteristic));
-      // console.log("No Data was recieved");
-     return -1;
-      //alert(characteristic)
+Alert.alert('sam')
+Alert.alert(characteristic)
+
+//const rawData = base64.decode(characteristic.value);
+   // console.log(characteristic.value);
+    // if (error) {
+    //  // console.log(error);
+    //   return -1;
+    // } else if (!characteristic?.value) {
+    //   alert(JSON.stringify(characteristic));
+    //   // console.log("No Data was recieved");
+    //  return -1;
+    //   //alert(characteristic)
       
-    }
+    // }
 
-    ///const rawData = base64.decode(characteristic.value);
-    const rawData = characteristic;
-    //console.log(rawData  +'sam');
-    console.log(rawData);
-    alert('sam')
-    let innerHeartRate = -1;
+    // ///const rawData = base64.decode(characteristic.value);
+    // const rawData = characteristic;
+    // //console.log(rawData  +'sam');
+    // console.log(rawData);
+    // alert('sam')
+    // let innerHeartRate = -1;
 
-    const firstBitValue= Number(rawData) & 0x01;
+    // const firstBitValue= Number(rawData) & 0x01;
 
-    if (firstBitValue === 0) {
-      innerHeartRate = rawData[1].charCodeAt(0);
-    } else {
-      innerHeartRate =
-        Number(rawData[1].charCodeAt(0) << 8) +
-        Number(rawData[2].charCodeAt(2));
-    }
+    // if (firstBitValue === 0) {
+    //   innerHeartRate = rawData[1].charCodeAt(0);
+    // } else {
+    //   innerHeartRate =
+    //     Number(rawData[1].charCodeAt(0) << 8) +
+    //     Number(rawData[2].charCodeAt(2));
+    // }
 
-    setHeartRate(innerHeartRate);
+    // setHeartRate(innerHeartRate);
   };
 
   const startStreamingData = async (device) => {
     if (device) {
       device.monitorCharacteristicForService(
+        
         // HEART_RATE_UUID,
         // HEART_RATE_CHARACTERISTIC,
-        onHeartRateUpdate
+        onHeartRateUpdate(),
+        
       );
     } else {
       console.log("No Device Connected");

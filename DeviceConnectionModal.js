@@ -10,51 +10,19 @@ import {
 } from "react-native";
 import { Device } from "react-native-ble-plx";
 
-// type DeviceModalListItemProps = {
-//   item: ListRenderItemInfo<Device>;
-//   connectToPeripheral: (device: Device) => void;
-//   closeModal: () => void;
-// };
 
-// type DeviceModalProps = {
-//   devices: Device[];
-//   visible: boolean;
-//   connectToPeripheral: (device: Device) => void;
-//   closeModal: () => void;
-// };
+
 
 const DeviceModalListItem = (props) => {
   const { item, connectToPeripheral, closeModal } = props;
 
-//   console.log('start')
 
-// console.log(item.item._manager);
-
-// console.log('end')
+//console.log(item.item.name);
 
 
 
 
 
-
-// {"_manager": 
-// {"_activePromises": [Object],
-//  "_activeSubscriptions": [Object],
-//   "_errorCodesToMessagesMapping": [Object], 
-//   "_eventEmitter": [NativeEventEmitter],
-//    "_scanEventSubscription": [Object], 
-//    "_uniqueId": 0}, 
-//    "id": "EA:FC:3D:19:EF:F0", 
-//    "isConnectable": null,
-//     "localName": null, 
-//     "manufacturerData": "TAASAgAB",
-//      "mtu": 23, "name": null, 
-//      "overflowServiceUUIDs": null,
-//       "rssi": -80, "serviceData":
-//        null, "serviceUUIDs": null, 
-//        "solicitedServiceUUIDs": null, 
-//        "txPowerLevel": null},
-//         "separators": {"highlight": [Function highlight], "unhighlight": [Function unhighlight], "updateProps": [Function updateProps]}}
   const connectAndCloseModal = useCallback(() => {
     connectToPeripheral(item.item);
     closeModal();
@@ -76,6 +44,7 @@ const DeviceModalListItem = (props) => {
       
   </Text>*/}
       <Text style={modalStyle.ctaButtonText}>
+        {/*item.item.id*/}
         {item.item.id}
       </Text>
     </TouchableOpacity>
@@ -90,7 +59,7 @@ const DeviceModal = (props) => {
   const renderDeviceModalListItem = useCallback(
     (item) => {
       // console.log(item.id);
-      console.log(item.item.id);
+      //console.log(item.item.mtu);
       // console.log(item.item.manufacturerData);
     //  console.log(item.item._manager);
       return (
@@ -104,6 +73,11 @@ const DeviceModal = (props) => {
     [closeModal, connectToPeripheral]
   );
 
+
+  const connectAndCloseModal = useCallback(() => {
+   // connectToPeripheral(item.item);
+    closeModal();
+  }, [closeModal, connectToPeripheral]);
   return (
     <Modal
       style={modalStyle.modalContainer}
@@ -122,7 +96,27 @@ const DeviceModal = (props) => {
           contentContainerStyle={modalStyle.modalFlatlistContiner}
           data={devices}
           renderItem={renderDeviceModalListItem}
+
+          ListFooterComponent={
+            <>
+            <TouchableOpacity
+      onPress={connectAndCloseModal}
+      style={modalStyle.ctaButton}
+    >
+    {/*<Text style={modalStyle.ctaButtonText}>
+      {item.item.manufacturerData}
+      
+      
+  </Text>*/}
+      <Text style={modalStyle.ctaButtonText}>
+        00:22:04:01:07:C1
+      </Text>
+    </TouchableOpacity>
+            </>
+          }
         />
+
+
       </SafeAreaView>
     </Modal>
   );

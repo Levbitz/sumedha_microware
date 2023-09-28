@@ -27,7 +27,8 @@ const App = () => {
   } = useBLE();
 
 
-  //console.log(allDevices);
+  //alert(JSON.stringify(connectedDevice));
+  console.log(connectedDevice);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
 
@@ -56,11 +57,11 @@ const App = () => {
   //console.log(allDevices);
 
 
-  useEffect(() => {
-    scanForDevices();
-    setIsModalVisible(true);
-  }, []);
-
+  // useEffect(() => {
+  //   scanForDevices();
+  //   setIsModalVisible(true);
+  // }, []);
+alert(JSON.stringify(connectedDevice))
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.heartRateTitleWrapper}>
@@ -69,7 +70,7 @@ const App = () => {
             <PulseIndicator />
 
             <Text style={styles.heartRateTitleText}>Your Measurement Is:</Text>
-            <Text style={styles.heartRateText}>{heartRate} </Text>
+            <Text style={styles.heartRateText}>{/*heartRate*/} </Text>
             <Text style={styles.heartRateText}>
               {connectedDevice.name}
             </Text>
@@ -85,7 +86,10 @@ const App = () => {
             Please Connect to a Heart Rate Monitor
         </Text>*/}
           <Text style={styles.heartRateTitleText}>
-            Scan Available Devices
+            Scan Available Devices 
+          </Text>
+          <Text style={styles.heartRateText}>
+            Please make Sure the bluetooth device is powered on
           </Text>
           </>
           
@@ -96,7 +100,7 @@ const App = () => {
         style={styles.ctaButton}
       >
         <Text style={styles.ctaButtonText}>
-          {connectedDevice ? "Disconnect" : "Connect"}
+          {connectedDevice ? "Disconnect" : "Scan"}
         </Text>
       </TouchableOpacity>
       <DeviceModal
@@ -127,8 +131,9 @@ const styles = StyleSheet.create({
     color: "black",
   },
   heartRateText: {
-    fontSize: 25,
+    fontSize: 20,
     marginTop: 15,
+    paddingHorizontal:10
   },
   ctaButton: {
     backgroundColor: "#FF6060",
